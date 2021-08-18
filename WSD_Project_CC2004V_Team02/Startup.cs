@@ -47,6 +47,8 @@ namespace WSD_Project_CC2004V_Team02
 
             app.UseHttpsRedirection();
             app.UseMvc();
+            app.UseStaticFiles();
+            app.UseAuthentication();
         }
     }
 }
