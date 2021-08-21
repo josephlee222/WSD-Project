@@ -87,7 +87,8 @@ namespace WSD_Project_CC2004V_Team02.Areas.Identity.Pages.Account
                     await _userManager.AddClaimAsync(user, new Claim(ClaimTypes.Role, "Member"));
 
                     await _signInManager.SignInAsync(user, isPersistent: false);
-                    return LocalRedirect(returnUrl);
+                    ModelState.AddModelError(string.Empty, "Successfully registered. Ready to use API!");
+                    return Page();
                 }
                 foreach (var error in result.Errors)
                 {

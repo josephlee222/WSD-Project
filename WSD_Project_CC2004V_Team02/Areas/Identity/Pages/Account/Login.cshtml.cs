@@ -77,7 +77,8 @@ namespace WSD_Project_CC2004V_Team02.Areas.Identity.Pages.Account
                 if (result.Succeeded)
                 {
                     _logger.LogInformation("User logged in.");
-                    return LocalRedirect(returnUrl);
+                    ModelState.AddModelError(string.Empty, "Successful Login. Ready to use API!");
+                    return Page();
                 }
                 if (result.RequiresTwoFactor)
                 {
