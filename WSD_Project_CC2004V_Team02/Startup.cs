@@ -90,12 +90,10 @@ namespace WSD_Project_CC2004V_Team02
                 app.UseHsts();
             }
 
-            
-
             app.UseHttpsRedirection();
-            app.UseMvc();
             app.UseStaticFiles();
             app.UseAuthentication();
+            app.UseMvc();
             CreateRoles(serviceProvider).Wait();
         }
 
