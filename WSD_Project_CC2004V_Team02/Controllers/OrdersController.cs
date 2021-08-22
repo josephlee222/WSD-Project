@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Security.Claims;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Authorization;
@@ -11,7 +12,7 @@ using WSD_Project_CC2004V_Team02.Models;
 
 namespace WSD_Project_CC2004V_Team02.Controllers
 {
-    [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme, Roles = "Member")]
+    [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme, Roles = "Member,Admin")]
     [Route("api/[controller]")]
     [ApiController]
     public class OrdersController : ControllerBase
@@ -27,7 +28,14 @@ namespace WSD_Project_CC2004V_Team02.Controllers
         [HttpGet]
         public IEnumerable<Orders> GetOrders()
         {
-            return _context.Orders;
+            if (User.FindFirstValue(ClaimTypes.Role) == "Admin")
+            {
+                return _context.Orders;
+            } else
+            {
+                var orders = _context.Orders.Where(Orders => Orders.Customer_ID.Contains(User.FindFirstValue(ClaimTypes.NameIdentifier)));
+                return orders;
+            }
         }
 
         // GET: api/Orders/5
@@ -44,6 +52,14 @@ namespace WSD_Project_CC2004V_Team02.Controllers
             if (orders == null)
             {
                 return NotFound();
+            }
+
+            if (User.FindFirstValue(ClaimTypes.Role) != "Admin")
+            {
+                if (orders.Customer_ID != User.FindFirstValue(ClaimTypes.NameIdentifier))
+                {
+                    return Forbid();
+                }
             }
 
             return Ok(orders);
@@ -63,6 +79,17 @@ namespace WSD_Project_CC2004V_Team02.Controllers
                 return BadRequest();
             }
 
+            var order = await _context.Orders.FindAsync(id);
+
+            if (User.FindFirstValue(ClaimTypes.Role) != "Admin")
+            {
+                if (orders.Customer_ID != User.FindFirstValue(ClaimTypes.NameIdentifier))
+                {
+                    return Forbid();
+                }
+            }
+
+            orders.Customer_ID = User.FindFirstValue(ClaimTypes.NameIdentifier);
             _context.Entry(orders).State = EntityState.Modified;
 
             try
@@ -93,6 +120,8 @@ namespace WSD_Project_CC2004V_Team02.Controllers
                 return BadRequest(ModelState);
             }
 
+            orders.Customer_ID = User.FindFirstValue(ClaimTypes.NameIdentifier);
+
             _context.Orders.Add(orders);
             await _context.SaveChangesAsync();
 
@@ -112,6 +141,14 @@ namespace WSD_Project_CC2004V_Team02.Controllers
             if (orders == null)
             {
                 return NotFound();
+            }
+
+            if (User.FindFirstValue(ClaimTypes.Role) != "Admin")
+            {
+                if (orders.Customer_ID != User.FindFirstValue(ClaimTypes.NameIdentifier))
+                {
+                    return Forbid();
+                }
             }
 
             _context.Orders.Remove(orders);

@@ -8,7 +8,7 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace WSD_Project_CC2004V_Team02.Controllers
 {
-    [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme, Roles = "Member")]
+    [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme, Roles = "Member,Admin")]
     [Route("api/[controller]")]
     [ApiController]
     public class ValuesController : ControllerBase

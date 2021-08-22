@@ -3,15 +3,17 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using WSD_Project_CC2004V_Team02.Models;
 
 namespace WSD_Project_CC2004V_Team02.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20210822111437_orders_add_customer_id")]
+    partial class orders_add_customer_id
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -190,12 +192,10 @@ namespace WSD_Project_CC2004V_Team02.Migrations
                         .ValueGeneratedOnAdd()
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<string>("Customer_ID");
-
-                    b.Property<string>("Customer_Name")
+                    b.Property<string>("Customer_ID")
                         .IsRequired();
 
-                    b.Property<string>("Delivery_Address")
+                    b.Property<string>("Customer_Name")
                         .IsRequired();
 
                     b.Property<DateTime>("Delivery_Date");

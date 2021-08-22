@@ -10,8 +10,8 @@ using WSD_Project_CC2004V_Team02.Models;
 namespace WSD_Project_CC2004V_Team02.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20210818070114_CreateIdentitySchema")]
-    partial class CreateIdentitySchema
+    [Migration("20210822103710_orders_add_time")]
+    partial class orders_add_time
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -138,9 +138,11 @@ namespace WSD_Project_CC2004V_Team02.Migrations
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserLogin<string>", b =>
                 {
-                    b.Property<string>("LoginProvider");
+                    b.Property<string>("LoginProvider")
+                        .HasMaxLength(128);
 
-                    b.Property<string>("ProviderKey");
+                    b.Property<string>("ProviderKey")
+                        .HasMaxLength(128);
 
                     b.Property<string>("ProviderDisplayName");
 
@@ -171,9 +173,11 @@ namespace WSD_Project_CC2004V_Team02.Migrations
                 {
                     b.Property<string>("UserId");
 
-                    b.Property<string>("LoginProvider");
+                    b.Property<string>("LoginProvider")
+                        .HasMaxLength(128);
 
-                    b.Property<string>("Name");
+                    b.Property<string>("Name")
+                        .HasMaxLength(128);
 
                     b.Property<string>("Value");
 
@@ -188,11 +192,12 @@ namespace WSD_Project_CC2004V_Team02.Migrations
                         .ValueGeneratedOnAdd()
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<int>("CustomerId");
-
-                    b.Property<string>("CustomerName");
+                    b.Property<string>("Customer_Name")
+                        .IsRequired();
 
                     b.Property<DateTime>("Delivery_Date");
+
+                    b.Property<TimeSpan>("Delivery_Time");
 
                     b.Property<string>("Description")
                         .IsRequired();
