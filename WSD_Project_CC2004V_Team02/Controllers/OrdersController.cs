@@ -74,16 +74,9 @@ namespace WSD_Project_CC2004V_Team02.Controllers
                 return BadRequest(ModelState);
             }
 
-            if (id != orders.Id)
-            {
-                return BadRequest();
-            }
-
-            var order = await _context.Orders.FindAsync(id);
-
             if (User.FindFirstValue(ClaimTypes.Role) != "Admin")
             {
-                if (orders.Customer_ID != User.FindFirstValue(ClaimTypes.NameIdentifier))
+                if (_context.Orders.Find(id).Customer_ID != User.FindFirstValue(ClaimTypes.NameIdentifier))
                 {
                     return Forbid();
                 }
