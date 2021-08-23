@@ -14,6 +14,6 @@ namespace WSD_Project_CC2004V_Team02.Models
         {
         }
 
-        public DbSet<WSD_Project_CC2004V_Team02.Models.Orders> Orders { get; set; }
+        public DbSet<Orders> Orders { get; set; }
     }
 }
