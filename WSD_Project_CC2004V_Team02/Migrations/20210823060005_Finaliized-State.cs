@@ -4,7 +4,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace WSD_Project_CC2004V_Team02.Migrations
 {
-    public partial class Initial : Migration
+    public partial class FinaliizedState : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -53,10 +53,13 @@ namespace WSD_Project_CC2004V_Team02.Migrations
                 {
                     Id = table.Column<int>(nullable: false)
                         .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
-                    CustomerName = table.Column<string>(nullable: false),
+                    Customer_Name = table.Column<string>(nullable: false),
+                    Customer_ID = table.Column<string>(nullable: true),
                     Description = table.Column<string>(nullable: false),
                     Quantity = table.Column<int>(nullable: false),
+                    Delivery_Address = table.Column<string>(nullable: false),
                     Delivery_Date = table.Column<DateTime>(nullable: false),
+                    Delivery_Time = table.Column<TimeSpan>(nullable: false),
                     Order_Date = table.Column<DateTime>(nullable: false)
                 },
                 constraints: table =>

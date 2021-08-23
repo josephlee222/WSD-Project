@@ -10,8 +10,8 @@ using WSD_Project_CC2004V_Team02.Models;
 namespace WSD_Project_CC2004V_Team02.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20210822103710_orders_add_time")]
-    partial class orders_add_time
+    [Migration("20210823060005_Finaliized-State")]
+    partial class FinaliizedState
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -192,7 +192,12 @@ namespace WSD_Project_CC2004V_Team02.Migrations
                         .ValueGeneratedOnAdd()
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
+                    b.Property<string>("Customer_ID");
+
                     b.Property<string>("Customer_Name")
+                        .IsRequired();
+
+                    b.Property<string>("Delivery_Address")
                         .IsRequired();
 
                     b.Property<DateTime>("Delivery_Date");

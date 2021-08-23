@@ -36,7 +36,7 @@ namespace WSD_Project_CC2004V_Team02
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
 
             services.AddDbContext<ApplicationDbContext>(options =>
-                    options.UseSqlServer(Configuration.GetConnectionString("WSD_Project_CC2004V_Team02Context")));
+                    options.UseSqlServer(Configuration.GetConnectionString("ApplicationContext")));
 
             services.AddDefaultIdentity<IdentityUser>().AddRoles<IdentityRole>()
                 .AddEntityFrameworkStores<ApplicationDbContext>();
