@@ -79,9 +79,11 @@ namespace WSD_Project_CC2004V_Team02.Controllers
                 return BadRequest();
             }
 
+            var order = _context.Orders.AsNoTracking().Where(x => x.Id == id);
+
             if (User.FindFirstValue(ClaimTypes.Role) != "Admin")
             {
-                if (_context.Orders.Find(id).Customer_ID != User.FindFirstValue(ClaimTypes.NameIdentifier))
+                if (order.First().Customer_ID != User.FindFirstValue(ClaimTypes.NameIdentifier))
                 {
                     return Forbid();
                 }

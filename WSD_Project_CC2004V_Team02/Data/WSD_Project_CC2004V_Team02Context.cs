@@ -13,7 +13,6 @@ namespace WSD_Project_CC2004V_Team02.Models
             : base(options)
         {
         }
-
         public DbSet<Orders> Orders { get; set; }
     }
 }
