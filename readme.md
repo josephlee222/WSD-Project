@@ -16,4 +16,4 @@ This project is a simple NET Core API project created to store food order for AB
 
 The project uses JWT Tokens for authentication so that unauthorised users cannot edit other users data.
 
-Joseph Lee - 2021
+Joseph Lee, Aloysius Lim - 2021
